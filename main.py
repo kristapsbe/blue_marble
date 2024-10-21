@@ -1,6 +1,8 @@
+import os
 import requests
 
-from settings import token
+
+token = os.getenv("ACCESS_TOKEN")
 
 response = requests.post('https://sh.dataspace.copernicus.eu/api/v1/process',
   headers={"Authorization" : f"Bearer {token}"},
@@ -42,4 +44,4 @@ response = requests.post('https://sh.dataspace.copernicus.eu/api/v1/process',
     """
 })
 
-print(response)
+print(response.content)

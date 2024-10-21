@@ -1,4 +1,5 @@
 https://dataspace.copernicus.eu/
+https://documentation.dataspace.copernicus.eu/APIs/Token.html
 
 probably python?
 
