@@ -28,3 +28,5 @@ source .venv/bin/activate
 * refresh the image of the world every week (?)
 
 do I store any user data?
+
+TODO: I get 30'000 processing units, can't spam them too much
