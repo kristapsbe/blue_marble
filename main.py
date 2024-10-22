@@ -1,10 +1,11 @@
 import os
+import json
 import requests
 
+from settings import username, password
 
-token = os.getenv("ACCESS_TOKEN")
+
 base_url = "https://sh.dataspace.copernicus.eu/api/v1/process"
-
 
 # https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Process/Examples/S2L2A.html
 evalscript = """
@@ -24,47 +25,69 @@ function evaluatePixel(sample) {
 }
 """
 
-for i in range(-180, 180):
-    for j in range(-90, 90):
-        request = {
-            "input": {
-                "bounds": {
-                    "properties": {"crs": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"},
-                    "bbox": [
-                        i,
-                        j,
-                        i+1,
-                        j+1,
-                    ],
-                },
-                "data": [
-                    {
-                        "type": "sentinel-2-l2a",
-                        "dataFilter": {
-                            "timeRange": {
-                                "from": "2022-06-01T00:00:00Z",
-                                "to": "2022-06-30T00:00:00Z",
-                            }
-                        },
-                    }
+def get_data(i, j, token="", retry=0):
+    request = {
+        "input": {
+            "bounds": {
+                "properties": {"crs": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"},
+                "bbox": [
+                    i,
+                    j,
+                    i+1,
+                    j+1,
                 ],
             },
-            "output": {
-                "width": 512,
-                "height": 512,
-            },
-            "evalscript": evalscript,
-        }
+            "data": [
+                {
+                    "type": "sentinel-2-l2a",
+                    "dataFilter": {
+                        "timeRange": {
+                            "from": "2022-06-01T00:00:00Z",
+                            "to": "2022-06-30T00:00:00Z",
+                        }
+                    },
+                }
+            ],
+        },
+        "output": {
+            "width": 512,
+            "height": 512,
+        },
+        "evalscript": evalscript,
+    }
 
-        response = requests.post(
-            base_url,
-            headers={"Authorization" : f"Bearer {token}"},
-            json=request
-        )
+    response = requests.post(
+        base_url,
+        headers={"Authorization" : f"Bearer {token}"},
+        json=request
+    )
 
-        if response.status_code == 200:
-            print(f'data/output_image_{i}_{j}.png')
-            with open(f'data/output_image_{i}_{j}.png', 'wb') as f:
-                f.write(response.content)
-        else:
-            print(f"Error: {response.status_code} - {response.text}")
+    if response.status_code == 200:
+        print(f'data/output_image_{i}_{j}.png')
+        with open(f'data/output_image_{i}_{j}.png', 'wb') as f:
+            f.write(response.content)
+    else:
+        print(f"Error: {response.status_code} - {response.text}")
+        if retry < 4:
+            get_data(i, j, get_token(), retry+1)
+
+
+def get_token():
+    return json.loads(
+        requests.post(
+            'https://identity.dataspace.copernicus.eu/auth/realms/CDSE/protocol/openid-connect/token', 
+            data = {
+                'client_id': 'cdse-public',
+                'username': username,
+                'password': password,
+                'grant_type': 'password'
+            }
+        ).content
+    )['access_token']
+
+
+token = get_token()
+
+for i in range(-180, 180):
+    for j in range(-90, 90):
+        get_data(i, j, token)
