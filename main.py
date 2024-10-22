@@ -65,10 +65,13 @@ def get_data(i, j, token="", retry=0):
         print(f'data/output_image_{i}_{j}.png')
         with open(f'data/output_image_{i}_{j}.png', 'wb') as f:
             f.write(response.content)
+        return token
     else:
-        print(f"Error: {response.status_code} - {response.text}")
+        print(f"Error: {response.status_code} - {response.text}, retry = {retry} ({i}, {j})")
         if retry < 4:
-            get_data(i, j, get_token(), retry+1)
+            return get_data(i, j, get_token(), retry+1)
+        else:
+            raise Exception
 
 
 def get_token():
@@ -89,4 +92,4 @@ token = get_token()
 
 for i in range(-180, 180):
     for j in range(-90, 90):
-        get_data(i, j, token)
+        token = get_data(i, j, token)
