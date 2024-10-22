@@ -5,6 +5,8 @@ import requests
 token = os.getenv("ACCESS_TOKEN")
 base_url = "https://sh.dataspace.copernicus.eu/api/v1/process"
 
+
+# https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Process/Examples/S2L2A.html
 evalscript = """
 //VERSION=3
 function setup() {
@@ -27,10 +29,10 @@ request = {
         "bounds": {
             "properties": {"crs": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"},
             "bbox": [
-                13.822174072265625,
-                45.85080395917834,
-                14.55963134765625,
-                46.29191774991382,
+                23.5,
+                56.5,
+                24.5,
+                57.5,
             ],
         },
         "data": [
@@ -38,8 +40,8 @@ request = {
                 "type": "sentinel-2-l2a",
                 "dataFilter": {
                     "timeRange": {
-                        "from": "2022-10-01T00:00:00Z",
-                        "to": "2022-10-31T00:00:00Z",
+                        "from": "2022-06-01T00:00:00Z",
+                        "to": "2022-06-30T00:00:00Z",
                     }
                 },
             }
