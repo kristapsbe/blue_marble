@@ -58,4 +58,8 @@ response = requests.post(
     json=request
 )
 
-print(response.content)
+if response.status_code == 200:
+    with open('output_image.png', 'wb') as f:
+        f.write(response.content)
+else:
+    print(f"Error: {response.status_code} - {response.text}")
