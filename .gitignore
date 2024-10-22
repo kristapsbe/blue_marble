@@ -4,3 +4,4 @@ __pycache__/*
 settings.py
 auth.sh
 output_image.png
+data/*

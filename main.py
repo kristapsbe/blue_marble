@@ -24,44 +24,47 @@ function evaluatePixel(sample) {
 }
 """
 
-request = {
-    "input": {
-        "bounds": {
-            "properties": {"crs": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"},
-            "bbox": [
-                23.5,
-                56.5,
-                24.5,
-                57.5,
-            ],
-        },
-        "data": [
-            {
-                "type": "sentinel-2-l2a",
-                "dataFilter": {
-                    "timeRange": {
-                        "from": "2022-06-01T00:00:00Z",
-                        "to": "2022-06-30T00:00:00Z",
-                    }
+for i in range(-180, 180):
+    for j in range(-90, 90):
+        request = {
+            "input": {
+                "bounds": {
+                    "properties": {"crs": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"},
+                    "bbox": [
+                        i,
+                        j,
+                        i+1,
+                        j+1,
+                    ],
                 },
-            }
-        ],
-    },
-    "output": {
-        "width": 512,
-        "height": 512,
-    },
-    "evalscript": evalscript,
-}
+                "data": [
+                    {
+                        "type": "sentinel-2-l2a",
+                        "dataFilter": {
+                            "timeRange": {
+                                "from": "2022-06-01T00:00:00Z",
+                                "to": "2022-06-30T00:00:00Z",
+                            }
+                        },
+                    }
+                ],
+            },
+            "output": {
+                "width": 512,
+                "height": 512,
+            },
+            "evalscript": evalscript,
+        }
 
-response = requests.post(
-    base_url,
-    headers={"Authorization" : f"Bearer {token}"},
-    json=request
-)
+        response = requests.post(
+            base_url,
+            headers={"Authorization" : f"Bearer {token}"},
+            json=request
+        )
 
-if response.status_code == 200:
-    with open('output_image.png', 'wb') as f:
-        f.write(response.content)
-else:
-    print(f"Error: {response.status_code} - {response.text}")
+        if response.status_code == 200:
+            print(f'data/output_image_{i}_{j}.png')
+            with open(f'data/output_image_{i}_{j}.png', 'wb') as f:
+                f.write(response.content)
+        else:
+            print(f"Error: {response.status_code} - {response.text}")
