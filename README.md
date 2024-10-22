@@ -30,3 +30,4 @@ source .venv/bin/activate
 do I store any user data?
 
 TODO: I get 30'000 processing units, can't spam them too much
+https://www.sentinel-hub.com/pricing/#tab-plans ?
