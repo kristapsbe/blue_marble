@@ -35,3 +35,6 @@ https://www.sentinel-hub.com/pricing/#tab-plans ?
 inspiration https://rawcdn.githack.com/sciecode/three.js/f4e363a8e0cf6c496f4191192d7eb15110442a7c/examples/webgl_paint_texture.html
 
 https://discoverthreejs.com/tips-and-tricks/
+
+https://www.sitepoint.com/webassembly-javascript-comparison/
+https://zaplib.com/docs/blog_post_mortem.html?ck_subscriber_id=1715213923
