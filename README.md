@@ -31,3 +31,5 @@ do I store any user data?
 
 TODO: I get 30'000 processing units, can't spam them too much
 https://www.sentinel-hub.com/pricing/#tab-plans ?
+
+inspiration https://rawcdn.githack.com/sciecode/three.js/f4e363a8e0cf6c496f4191192d7eb15110442a7c/examples/webgl_paint_texture.html
