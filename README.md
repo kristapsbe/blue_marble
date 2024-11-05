@@ -40,3 +40,7 @@ https://www.sitepoint.com/webassembly-javascript-comparison/
 https://zaplib.com/docs/blog_post_mortem.html?ck_subscriber_id=1715213923
 
 wasm alertnative https://github.com/asny/three-d
+
+```bash
+brew install --cask julia
+```
