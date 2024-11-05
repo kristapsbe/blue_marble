@@ -45,3 +45,7 @@ activate virtual env
 ```bash
 source .venv/bin/activate
 ```
+
+```bash
+python -m jupyterlab
+```
