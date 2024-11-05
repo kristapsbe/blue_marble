@@ -10,6 +10,8 @@ notebook()
 
 ## Install
 
+### Julia
+
 ```bash
 brew install --cask julia
 ```
@@ -25,3 +27,17 @@ notebook()
 ```
 
 http://localhost:8888/
+
+### Python
+
+create virtual env
+
+```bash
+python3 -m venv .venv
+```
+
+activate virtual env
+
+```bash
+source .venv/bin/activate
+```
