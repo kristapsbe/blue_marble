@@ -5,3 +5,4 @@ settings.py
 auth.sh
 output_image.png
 data/*
+.ipynb_checkpoints/*
