@@ -3,6 +3,10 @@ https://documentation.dataspace.copernicus.eu/APIs/Token.html
 
 ## Run
 
+```bash
+using IJulia
+notebook()
+```
 
 ## Install
 
