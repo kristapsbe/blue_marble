@@ -3,6 +3,7 @@ https://documentation.dataspace.copernicus.eu/APIs/Token.html
 
 https://documentation.dataspace.copernicus.eu/Applications/JupyterHub.html
 a bunch of samples available here https://jupyterhub.dataspace.copernicus.eu/
+looks like the examples are available here as well https://github.com/eu-cdse/notebook-samples/tree/main
 
 ## Run
 
