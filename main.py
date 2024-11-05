@@ -140,6 +140,12 @@ request = {
     "evalscript": evalscript,
 }
 
+print(get_token())
+
+print(request)
+
+quit()
+
 response = requests.post(
     base_url,
     headers={"Authorization" : f"Bearer {get_token()}"},
@@ -148,4 +154,7 @@ response = requests.post(
 
 print(response)
 print(response.headers)
-print(response.content)
+#print(response.content)
+
+with open(f'data/output_images.tar.gz', 'wb') as f:
+    f.write(response.content)
