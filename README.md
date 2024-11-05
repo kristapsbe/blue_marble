@@ -1,6 +1,9 @@
 https://dataspace.copernicus.eu/
 https://documentation.dataspace.copernicus.eu/APIs/Token.html
 
+https://documentation.dataspace.copernicus.eu/Applications/JupyterHub.html
+a bunch of samples available here https://jupyterhub.dataspace.copernicus.eu/
+
 ## Run
 
 ```bash
